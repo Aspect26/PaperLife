@@ -12,7 +12,7 @@ class Game(object):
     def __init__(self):
         self._done = False
         self._event_dispatcher = EventDispatcher(self)
-        self._renderer = Renderer(GameSettings.SCREEN_WIDTH, GameSettings.SCREEN_HEIGHT)
+        self._renderer = Renderer(GameSettings.Screen.WIDTH, GameSettings.Screen.HEIGHT)
         self._timer = GameTimer()
         self._city = City()  # TODO: this should be loaded from somewhere -> introduce save/load system
 
