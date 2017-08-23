@@ -10,3 +10,4 @@ class GameSettings:
     class Paths:
         class Images:
             Buildings = './resources/img/buildings/'
+            Background = './resources/img/background.jpg'

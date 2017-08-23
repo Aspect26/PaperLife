@@ -16,7 +16,10 @@ class Renderer:
         self._apply_render()
 
     def _render_background(self) -> None:
-        self._screen.fill((255, 255, 255))
+        background_image = pygame.image.load(GameSettings.Paths.Images.Background)
+        background_image = pygame.transform.scale(background_image,
+                                                  (GameSettings.Screen.WIDTH, GameSettings.Screen.HEIGHT))
+        self._screen.blit(background_image, (0, 0))
 
     def _render_city(self, city: City) -> None:
         for building in city.get_buildings():
