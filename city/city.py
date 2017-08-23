@@ -19,6 +19,7 @@ class City(object):
         self._occupied_fields = []
 
         self.add_building(TownHall(self))
+        self.enqueue_game_event(CollectRentEvent(self))
 
     def get_money(self) -> int:
         return self._money
@@ -42,7 +43,6 @@ class City(object):
 
     def add_building(self, building: Building) -> None:
         self._buildings.append(building)
-        self.enqueue_game_event(CollectRentEvent(building), 0)
         for x in range(building.x, building.width + building.x):
             for y in range(building.y, building.height + building.y):
                 self._occupied_fields.append((x, y))
@@ -57,6 +57,6 @@ class City(object):
             else:
                 break
 
-    def enqueue_game_event(self, event: GameEvent, after_time: int) -> None:
+    def enqueue_game_event(self, event: GameEvent, after_time: int = 0) -> None:
         in_time = round(time.time()) + after_time
         self._events_queue.put((in_time, event))

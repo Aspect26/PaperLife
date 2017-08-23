@@ -80,6 +80,10 @@ class UI:
         hitbox_surface = pygame.Surface((building.width * field_size, building.height * field_size))
         hitbox_surface.fill((0, 255, 0))
         hitbox_surface.set_alpha(128)
+        building_picture = pygame.image.load(building.image_path)
+        building_picture = pygame.transform.scale(building_picture, (
+            building.width * GameSettings.Game.FIELD_SIZE, building.height * GameSettings.Game.FIELD_SIZE))
+        hitbox_surface.blit(building_picture, (0, 0))
         screen.blit(hitbox_surface, (grid_position[0], grid_position[1]))
 
     # TODO: this will be in top toolbar at some time
