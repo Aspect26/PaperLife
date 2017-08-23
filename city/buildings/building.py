@@ -1,14 +1,15 @@
+from pygame.rect import Rect
+
 from game.constants import GameSettings
 
 
 class Building(object):
 
-    def __init__(self, rent, rent_time, city, x, y, image_file, title):
+    def __init__(self, rent: int, rent_time: int, city, position: Rect, image_file: str, title: str):
         self._rent = rent
         self._rent_time = rent_time
         self._city = city
-        self._x = x
-        self._y = y
+        self._position = position
         self._image_path = GameSettings.Paths.Images.Buildings + image_file
         self._title = title
 
@@ -26,11 +27,19 @@ class Building(object):
 
     @property
     def x(self) -> int:
-        return self._x
+        return self._position.x
 
     @property
     def y(self) -> int:
-        return self._y
+        return self._position.y
+
+    @property
+    def width(self) -> int:
+        return self._position.width
+
+    @property
+    def height(self) -> int:
+        return self._position.height
 
     @property
     def image_path(self) -> str:

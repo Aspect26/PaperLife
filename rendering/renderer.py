@@ -20,7 +20,11 @@ class Renderer:
 
     def _render_city(self, city: City) -> None:
         for building in city.get_buildings():
-            self._screen.blit(pygame.image.load(building.image_path),
+            # TODO: introduce image caching
+            building_picture = pygame.image.load(building.image_path)
+            building_picture = pygame.transform.scale(building_picture, (
+            building.width * GameSettings.Game.FIELD_SIZE, building.height * GameSettings.Game.FIELD_SIZE))
+            self._screen.blit(building_picture,
                               (building.x * GameSettings.Game.FIELD_SIZE, building.y * GameSettings.Game.FIELD_SIZE))
 
     def _render_ui(self, ui: UI):
