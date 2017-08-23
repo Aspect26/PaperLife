@@ -30,6 +30,9 @@ class Game(object):
     def toggle_grid(self) -> None:
         self._ui.toggle_grid()
 
+    def toggle_buildings_window(self) -> None:
+        self._ui.toggle_buildings_window()
+
     def save_game(self) -> None:
         pass
 

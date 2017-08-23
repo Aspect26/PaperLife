@@ -2,6 +2,7 @@ import pygame
 
 from city.city import City
 from constants import GameSettings
+from ui.window.buildings_window import BuildingsWindow
 
 
 class UI:
@@ -12,14 +13,27 @@ class UI:
         self._LARGE_FONT = pygame.font.SysFont(self._FONT_NAME, 15)
         self._show_grid = False
         self._city = city
+        self._active_ui_components = []
+
+        self._buildings_window = None
 
     def render(self, screen: pygame.Surface) -> None:
         if self._show_grid:
             self._render_grid(screen)
+        for ui_component in self._active_ui_components:
+            ui_component.render(screen)
         self._render_money(screen)
 
     def toggle_grid(self) -> None:
         self._show_grid = not self._show_grid
+
+    def toggle_buildings_window(self) -> None:
+        if self._buildings_window is not None:
+            self._active_ui_components.remove(self._buildings_window)
+            self._buildings_window = None
+        else:
+            self._buildings_window = BuildingsWindow()
+            self._active_ui_components.append(self._buildings_window)
 
     def _render_grid(self, screen: pygame.Surface) -> None:
         width = GameSettings.Screen.WIDTH
