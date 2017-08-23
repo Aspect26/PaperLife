@@ -1,5 +1,5 @@
 from city.buildings.building import Building
-from events.game_events.game_event import GameEvent
+from events.game_event import GameEvent
 
 
 class CollectRentEvent(GameEvent):

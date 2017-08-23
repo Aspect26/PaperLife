@@ -1,12 +1,11 @@
-from queue import PriorityQueue
-
 import time
+from queue import PriorityQueue
 from typing import List, Tuple
 
 from city.buildings.building import Building
 from city.buildings.town_hall import TownHall
-from events.game_events.collect_rent_event import CollectRentEvent
-from events.game_events.game_event import GameEvent
+from events.collect_rent_event import CollectRentEvent
+from events.game_event import GameEvent
 
 
 class City(object):

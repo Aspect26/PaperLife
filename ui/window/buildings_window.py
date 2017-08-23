@@ -1,3 +1,5 @@
+from pygame.rect import Rect
+
 from game.constants import GameSettings
 from game.data import get_all_buildings
 from ui.buttons.building_button import BuildingButton
@@ -8,8 +10,8 @@ class BuildingsWindow(Window):
     def __init__(self):
         self._MARGIN = 10
         self._WIDTH = 200
-        super().__init__((GameSettings.Screen.WIDTH - self._MARGIN - self._WIDTH, self._MARGIN),
-                         (self._WIDTH, GameSettings.Screen.HEIGHT - 2 * self._MARGIN))
+        super().__init__(Rect(GameSettings.Screen.WIDTH - self._MARGIN - self._WIDTH, self._MARGIN, self._WIDTH,
+                              GameSettings.Screen.HEIGHT - 2 * self._MARGIN))
 
         self._create_building_buttons()
 

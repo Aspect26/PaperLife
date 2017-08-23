@@ -1,3 +1,5 @@
+from typing import Tuple
+
 from pygame.rect import Rect
 
 from game.constants import GameSettings
@@ -48,3 +50,7 @@ class Building(object):
     @property
     def title(self) -> str:
         return self._title
+
+    def set_position(self, position: Tuple) -> None:
+        self._position.x = position[0]
+        self._position.y = position[1]
