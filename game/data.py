@@ -14,7 +14,6 @@ class BuildingData(object):
 
 _ALL_BUILDINGS = [
     BuildingData(TownHall),
-    BuildingData(TownHall),
 ]
 
 
