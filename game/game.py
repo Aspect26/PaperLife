@@ -1,8 +1,8 @@
 import pygame
 
 from city.city import City
-from constants import GameSettings
 from events.user_events.event_dispatcher import EventDispatcher
+from game.constants import GameSettings
 from rendering.renderer import Renderer
 from timing.game_timer import GameTimer
 from ui.ui import UI

@@ -13,6 +13,7 @@ class Window(UIComponent):
 
     def add_component(self, component: UIComponent):
         component.position = self._fit_component_position(component.position, component.size)
+        self._components.append(component)
 
     def render(self, screen: Surface) -> None:
         self._render_background(screen)

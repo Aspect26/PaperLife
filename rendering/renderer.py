@@ -1,7 +1,7 @@
 import pygame
 
 from city.city import City
-from constants import GameSettings
+from game.constants import GameSettings
 from ui.ui import UI
 
 
