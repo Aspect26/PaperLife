@@ -1,7 +1,7 @@
 import unittest
 
 
-class AlwaysTrueTest(unittest.TestCase):
+class TestAlwaysTrue(unittest.TestCase):
 
-    def testTrue(self):
+    def test_true(self):
         self.assertEqual(True, True, "True shall be always equal to True")
