@@ -24,6 +24,9 @@ class City(object):
     def get_money(self) -> int:
         return self._money
 
+    def get_population(self) -> int:
+        return sum(building.population for building in self.get_buildings())
+
     def get_buildings(self) -> List[Building]:
         return self._buildings
 

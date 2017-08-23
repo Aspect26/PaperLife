@@ -9,7 +9,7 @@ class UserEventDispatcher(object):
 
     def dispatch(self, event: Event) -> None:
         if event.type == pygame.QUIT:
-            self._game_object.exit_game()
+            self._game_object.end_game()
         elif event.type == pygame.MOUSEBUTTONDOWN:
             self._game_object.handle_mouse_down(pygame.mouse.get_pos())
         elif event.type == pygame.MOUSEBUTTONUP:

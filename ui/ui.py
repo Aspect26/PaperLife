@@ -38,6 +38,7 @@ class UI:
         for ui_component in self._active_ui_components:
             ui_component.render(screen)
         self._render_money(screen)
+        self._render_population(screen)
 
     def toggle_grid(self) -> None:
         self._show_grid = not self._show_grid
@@ -90,3 +91,8 @@ class UI:
     def _render_money(self, screen: pygame.Surface) -> None:
         label = self._LARGE_FONT.render('Money: ' + str(self._game.get_city().get_money()) + '€', 1, (0, 80, 200))
         screen.blit(label, (10, 10))
+
+    # TODO: this will be in top toolbar at some time
+    def _render_population(self, screen: pygame.Surface) -> None:
+        label = self._LARGE_FONT.render('Population: ' + str(self._game.get_city().get_population()), 1, (0, 80, 200))
+        screen.blit(label, (210, 10))
