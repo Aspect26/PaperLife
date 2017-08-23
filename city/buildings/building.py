@@ -44,6 +44,10 @@ class Building(object):
         return self._position.height
 
     @property
+    def position(self) -> Rect:
+        return self._position
+
+    @property
     def image_path(self) -> str:
         return self._image_path
 
@@ -53,4 +57,5 @@ class Building(object):
 
     def set_position(self, position: Tuple) -> None:
         self._position.x = position[0]
-        self._position.y = position[1]
+        self._position.y = position[1
+        ]

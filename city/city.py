@@ -2,6 +2,8 @@ import time
 from queue import PriorityQueue
 from typing import List, Tuple
 
+from pygame.rect import Rect
+
 from city.buildings.building import Building
 from city.buildings.town_hall import TownHall
 from events.collect_rent_event import CollectRentEvent
@@ -26,6 +28,14 @@ class City(object):
 
     def is_field_occupied(self, field: Tuple):
         return field in self._occupied_fields
+
+    def is_rectangle_ocuppied(self, rectangle: Rect):
+        for x in range(rectangle.x, rectangle.x + rectangle.width, 1):
+            for y in range(rectangle.y, rectangle.y + rectangle.height, 1):
+                if self.is_field_occupied((x, y)):
+                    return True
+
+        return False
 
     def add_money(self, amount: int) -> None:
         self._money += amount
