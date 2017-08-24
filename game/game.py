@@ -22,7 +22,7 @@ class Game(object):
         self._event_dispatcher = UserEventDispatcher(self)
         self._renderer = Renderer(GameSettings.Screen.WIDTH, GameSettings.Screen.HEIGHT)
         self._timer = GameTimer()
-        self._city = self.load_city()
+        self._city = self.load_game()
         self._ui = UI(self)
         self._state = NormalState()
 
@@ -69,7 +69,7 @@ class Game(object):
         with open(self._SAVE_FILE_PATH, 'w') as save_file:
             save_file.write(json.dumps(json_data, indent=4))
 
-    def load_city(self) -> City:
+    def load_game(self) -> City:
         city = City()
         if os.path.isfile(self._SAVE_FILE_PATH):
             with open('save.plsf') as save_file:
