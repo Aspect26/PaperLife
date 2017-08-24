@@ -78,3 +78,8 @@ class Building(object):
             JsonKeys.Position.X: self.position.x,
             JsonKeys.Position.Y: self.position.y,
         }
+
+    def load(self, data: dict) -> None:
+        self._population = data[JsonKeys.Building.Population]
+        self._position.x = data[JsonKeys.Position.X]
+        self._position.y = data[JsonKeys.Position.Y]
