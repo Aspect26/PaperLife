@@ -2,14 +2,17 @@ from typing import Tuple
 
 from pygame.rect import Rect
 
+from city.growth import GrowthFactor
 from game.constants import GameSettings
 
 
 class Building(object):
-
-    def __init__(self, rent: int, rent_time: int, city, position: Rect, image_file: str, title: str):
+    def __init__(self, rent: int, max_population: int, growth_factor: GrowthFactor, city, position: Rect,
+                 image_file: str, title: str):
         self._rent = rent
-        self._rent_time = rent_time
+        self._max_population = max_population
+        self._population = 0
+        self._growth_factor = growth_factor
         self._city = city
         self._position = position
         self._image_path = GameSettings.Paths.Images.Buildings + image_file
@@ -20,8 +23,16 @@ class Building(object):
         return self._rent
 
     @property
-    def rent_time(self) -> int:
-        return self._rent_time
+    def max_population(self) -> int:
+        return self._max_population
+
+    @property
+    def population(self) -> int:
+        return self._population
+
+    @property
+    def growth_factor(self) -> GrowthFactor:
+        return self._growth_factor
 
     @property
     def city(self):
@@ -57,5 +68,4 @@ class Building(object):
 
     def set_position(self, position: Tuple) -> None:
         self._position.x = position[0]
-        self._position.y = position[1
-        ]
+        self._position.y = position[1]
