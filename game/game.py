@@ -1,3 +1,4 @@
+import json
 from typing import Tuple
 
 import pygame
@@ -61,7 +62,9 @@ class Game(object):
                 self._state = NormalState()
 
     def save_game(self) -> None:
-        pass
+        json_data = self._city.jsonify()
+        with open('save.plsf', 'w') as save_file:
+            save_file.write(json.dumps(json_data, indent=4))
 
     def end_game(self) -> None:
         self.save_game()

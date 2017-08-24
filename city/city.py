@@ -10,10 +10,10 @@ from city.growth import GrowthFactor
 from events.collect_rent_event import CollectRentEvent
 from events.game_event import GameEvent
 from events.population_growth_event import PopulationGrowthEvent
+from game.json_keys import JsonKeys
 
 
 class City(object):
-
     def __init__(self):
         self._events_heap = []
         self._money = 0
@@ -78,3 +78,11 @@ class City(object):
     def enqueue_game_event(self, event: GameEvent, after_time: int = 0) -> None:
         in_time = round(time.time()) + after_time
         heapq.heappush(self._events_heap, (in_time, event))
+
+    def jsonify(self) -> dict:
+        return {
+            JsonKeys.City.TotalMoney: self.get_money(),
+            JsonKeys.City.Buildings: [building.jsonify() for building in self.get_buildings()],
+            JsonKeys.City.Events: [{JsonKeys.Event.EventTime: event_time, JsonKeys.Event.Event: type(event).__name__}
+                                   for event_time, event in self._events_heap],
+        }

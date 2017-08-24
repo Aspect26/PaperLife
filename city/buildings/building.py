@@ -4,6 +4,7 @@ from pygame.rect import Rect
 
 from city.growth import GrowthFactor
 from game.constants import GameSettings
+from game.json_keys import JsonKeys
 
 
 class Building(object):
@@ -69,3 +70,11 @@ class Building(object):
     def set_position(self, position: Tuple) -> None:
         self._position.x = position[0]
         self._position.y = position[1]
+
+    def jsonify(self) -> dict:
+        return {
+            JsonKeys.Building.Id: type(self).__name__,
+            JsonKeys.Building.Population: self._population,
+            JsonKeys.Position.X: self.position.x,
+            JsonKeys.Position.Y: self.position.y,
+        }
