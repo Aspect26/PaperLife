@@ -1,3 +1,6 @@
+import json
+import os
+import traceback
 from typing import Tuple
 
 import pygame
@@ -13,12 +16,13 @@ from ui.ui import UI
 
 class Game(object):
     def __init__(self):
+        self._SAVE_FILE_PATH = 'save.plsf'
         pygame.init()
         self._done = False
         self._event_dispatcher = UserEventDispatcher(self)
         self._renderer = Renderer(GameSettings.Screen.WIDTH, GameSettings.Screen.HEIGHT)
         self._timer = GameTimer()
-        self._city = City()  # TODO: this should be loaded from somewhere -> introduce save/load system
+        self._city = self.load_game()
         self._ui = UI(self)
         self._state = NormalState()
 
@@ -61,7 +65,22 @@ class Game(object):
                 self._state = NormalState()
 
     def save_game(self) -> None:
-        pass
+        json_data = self._city.jsonify()
+        with open(self._SAVE_FILE_PATH, 'w') as save_file:
+            save_file.write(json.dumps(json_data, indent=4))
+
+    def load_game(self) -> City:
+        city = City()
+        if os.path.isfile(self._SAVE_FILE_PATH):
+            with open('save.plsf') as save_file:
+                data = json.load(save_file)
+            try:
+                city.load(data)
+            except Exception:
+                traceback.print_exc()
+                city = City()
+
+        return city
 
     def end_game(self) -> None:
         self.save_game()
