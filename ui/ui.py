@@ -39,6 +39,7 @@ class UI:
             ui_component.render(screen)
         self._render_money(screen)
         self._render_population(screen)
+        self._render_growth_factor(screen)
 
     def toggle_grid(self) -> None:
         self._show_grid = not self._show_grid
@@ -95,4 +96,11 @@ class UI:
     # TODO: this will be in top toolbar at some time
     def _render_population(self, screen: pygame.Surface) -> None:
         label = self._LARGE_FONT.render('Population: ' + str(self._game.get_city().get_population()), 1, (0, 80, 200))
-        screen.blit(label, (210, 10))
+        screen.blit(label, (140, 10))
+
+    # TODO: this will be in top toolbar at some time
+    def _render_growth_factor(self, screen: pygame.Surface) -> None:
+        gf = self._game.get_city().get_growth_factor()
+        label = self._LARGE_FONT.render('GF: {0:1.2f}, {1:1.2f}'.format(gf.food, gf.health_care), 1,
+                                        (0, 80, 200))
+        screen.blit(label, (300, 10))
