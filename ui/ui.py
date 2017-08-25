@@ -73,7 +73,7 @@ class UI:
     def _render_building_hitbox(self, screen: pygame.Surface, building: Building):
         position = pygame.mouse.get_pos()
         field_size = GameSettings.Game.FIELD_SIZE
-        grid_position = round(position[0] / field_size) * field_size, round(position[1] / field_size) * field_size
+        grid_position = int(position[0] / field_size) * field_size, int(position[1] / field_size) * field_size
 
         hitbox_surface = pygame.Surface((building.width * field_size, building.height * field_size))
         hitbox_surface.fill((0, 255, 0))
