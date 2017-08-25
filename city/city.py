@@ -100,6 +100,7 @@ class City(object):
             building_obj.load(building)
             self._buildings.append(building_obj)
 
+        self._events_heap = []
         for event in data[JsonKeys.City.Events]:
             event_time = event[JsonKeys.Event.EventTime]
             event_obj = globals()[event[JsonKeys.Event.Event]](self)

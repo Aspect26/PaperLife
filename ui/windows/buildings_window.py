@@ -3,7 +3,7 @@ from pygame.rect import Rect
 from game.constants import GameSettings
 from game.data import get_all_buildings
 from ui.buttons.building_button import BuildingButton
-from ui.window.window import Window
+from ui.windows.window import Window
 
 
 class BuildingsWindow(Window):
