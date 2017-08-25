@@ -15,9 +15,9 @@ from ui.ui import UI
 
 
 class Game(object):
+
     def __init__(self):
         self._SAVE_FILE_PATH = 'save.plsf'
-        pygame.init()
         self._done = False
         self._event_dispatcher = UserEventDispatcher(self)
         self._renderer = Renderer(GameSettings.Screen.WIDTH, GameSettings.Screen.HEIGHT)
