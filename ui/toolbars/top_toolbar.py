@@ -37,10 +37,10 @@ class TopToolbar(UIComponent):
         self._render_growth_factor(screen)
 
     def _render_background(self, screen: Surface) -> None:
-        pygame.draw.polygon(screen, (255, 255, 255), self._BORDER_POINTS)
+        pygame.draw.polygon(screen, Colors.White, self._BORDER_POINTS)
 
     def _render_border(self, screen: pygame.Surface) -> None:
-        pygame.draw.polygon(screen, (0, 0, 0), self._BORDER_POINTS, 2)
+        pygame.draw.polygon(screen, Colors.Black, self._BORDER_POINTS, 2)
 
     def _render_money(self, screen: pygame.Surface) -> None:
         label = Fonts.LARGE_FONT.render('Money: ' + str(self._city.get_money()) + '€', 1, Colors.Blue)
