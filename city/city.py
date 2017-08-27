@@ -5,7 +5,7 @@ from typing import List, Tuple
 from pygame.rect import Rect
 
 from city.buildings.building import Building
-from city.buildings.town_hall import TownHall
+from city.buildings.buildings import TownHall, FlatHouse1, FlatHouse2, FlatHouse3
 from city.growth import GrowthFactor
 from events.collect_rent_event import CollectRentEvent
 from events.game_event import GameEvent
@@ -65,6 +65,7 @@ class City(object):
 
     def add_building(self, building: Building) -> None:
         self._buildings.append(building)
+        self._money -= building.cost
         for x in range(building.x, building.width + building.x):
             for y in range(building.y, building.height + building.y):
                 self._occupied_fields.append((x, y))

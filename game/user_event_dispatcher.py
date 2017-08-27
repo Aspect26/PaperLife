@@ -1,6 +1,8 @@
 import pygame
 from pygame.event import Event
 
+from game.state import NormalState
+
 
 class UserEventDispatcher(object):
 
@@ -19,3 +21,5 @@ class UserEventDispatcher(object):
                 self._game_object.toggle_grid()
             elif event.key == pygame.K_b:
                 self._game_object.toggle_buildings_window()
+            elif event.key == pygame.K_ESCAPE:
+                self._game_object.set_state(NormalState())

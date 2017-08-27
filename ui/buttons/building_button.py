@@ -22,7 +22,8 @@ class BuildingButton(UIComponent):
         pass
 
     def handle_mouse_up(self, game, position: Tuple) -> None:
-        game.set_state(PlacingNewBuildingState(self._building_type.building(game.get_city())))
+        if self._building_type.cost <= game.get_city().get_money():
+            game.set_state(PlacingNewBuildingState(self._building_type.building(game.get_city())))
 
     def render(self, screen: Surface) -> None:
         self._render_building_image(screen)
