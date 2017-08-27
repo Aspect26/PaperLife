@@ -6,6 +6,7 @@ from pygame.surface import Surface
 
 from game.data import BuildingData
 from game.state import PlacingNewBuildingState
+from rendering.colors import Colors
 from ui.component import UIComponent
 
 
@@ -30,7 +31,7 @@ class BuildingButton(UIComponent):
         self._render_border(screen)
 
     def _render_border(self, screen: Surface) -> None:
-        pygame.draw.rect(screen, (0, 0, 0),
+        pygame.draw.rect(screen, Colors.Black,
                          (self.position.x, self.position.y, self.position.width, self.position.height),
                          self._BORDER_SIZE)
 
@@ -42,5 +43,5 @@ class BuildingButton(UIComponent):
     def _render_building_label(self, screen: Surface) -> None:
         # TODO: move all fonts to one place
         font = pygame.font.SysFont('monospace', 10)
-        label = font.render(self._building_type.title, 1, (5, 80, 200))
+        label = font.render(self._building_type.title, 1, Colors.Blue)
         screen.blit(label, (self.position.x + 2, self.position.y + self.position.width + 2))

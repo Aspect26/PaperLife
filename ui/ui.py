@@ -5,13 +5,14 @@ import pygame
 from city.buildings.building import Building
 from game.constants import GameSettings
 from game.state import PlacingNewBuildingState
+from rendering.colors import Colors
 from ui.toolbars.top_toolbar import TopToolbar
 from ui.windows.buildings_window import BuildingsWindow
 
 
 class UI:
     def __init__(self, game):
-        self._GRID_LINE_COLOR = (230, 230, 230)
+        self._GRID_LINE_COLOR = Colors.LightGray
         self._show_grid = False
         self._game = game
         self._active_ui_components = [TopToolbar(self._game.get_city())]
@@ -66,7 +67,7 @@ class UI:
         for x in range(0, 50, 1):
             for y in range(0, 50, 1):
                 if self._game.get_city().is_field_occupied((x, y)):
-                    pygame.draw.rect(occupation_surface, (255, 0, 0), (x * size, y * size, size, size), 0)
+                    pygame.draw.rect(occupation_surface, Colors.Red, (x * size, y * size, size, size), 0)
 
         screen.blit(occupation_surface, (0, 0))
 
@@ -76,7 +77,7 @@ class UI:
         grid_position = int(position[0] / field_size) * field_size, int(position[1] / field_size) * field_size
 
         hitbox_surface = pygame.Surface((building.width * field_size, building.height * field_size))
-        hitbox_surface.fill((0, 255, 0))
+        hitbox_surface.fill(Colors.Green)
         hitbox_surface.set_alpha(128)
         building_picture = pygame.image.load(building.image_path)
         building_picture = pygame.transform.scale(building_picture, (

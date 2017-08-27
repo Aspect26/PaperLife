@@ -4,6 +4,7 @@ import pygame
 from pygame.rect import Rect
 from pygame.surface import Surface
 
+from rendering.colors import Colors
 from ui.component import UIComponent
 
 
@@ -36,11 +37,11 @@ class Window(UIComponent):
             component.render(screen)
 
     def _render_background(self, screen: Surface) -> None:
-        pygame.draw.rect(screen, (255, 255, 255),
+        pygame.draw.rect(screen, Colors.White,
                          (self.position.x, self.position.y, self.position.width, self.position.height), 0)
 
     def _render_border(self, screen: Surface) -> None:
-        pygame.draw.rect(screen, (0, 0, 0),
+        pygame.draw.rect(screen, Colors.Black,
                          (self.position.x, self.position.y, self.position.width, self.position.height), 3)
 
     def _fit_component_position(self, position: Rect) -> Rect:
