@@ -8,11 +8,12 @@ from game.json_keys import JsonKeys
 
 
 class Building(object):
-    def __init__(self, rent: int, max_population: int, growth_factor: GrowthFactor, city, position: Rect,
+    def __init__(self, rent: int, max_population: int, cost: int, growth_factor: GrowthFactor, city, position: Rect,
                  image_file: str, title: str):
         self._rent = rent
         self._max_population = max_population
         self._population = 0
+        self._cost = cost
         self._growth_factor = growth_factor
         self._city = city
         self._position = position
@@ -30,6 +31,10 @@ class Building(object):
     @property
     def population(self) -> int:
         return self._population
+
+    @property
+    def cost(self) -> int:
+        return self._cost
 
     @property
     def growth_factor(self) -> GrowthFactor:
@@ -70,6 +75,10 @@ class Building(object):
     def set_position(self, position: Tuple) -> None:
         self._position.x = position[0]
         self._position.y = position[1]
+
+    def increase_population(self):
+        if not self._population >= self._max_population:
+            self._population += 1
 
     def jsonify(self) -> dict:
         return {

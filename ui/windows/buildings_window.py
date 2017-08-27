@@ -1,7 +1,7 @@
 from pygame.rect import Rect
 
 from game.constants import GameSettings
-from game.data import get_all_buildings
+from game.data import get_purchasable_buildings
 from ui.buttons.building_button import BuildingButton
 from ui.windows.window import Window
 
@@ -18,7 +18,7 @@ class BuildingsWindow(Window):
     def _create_building_buttons(self):
         current_y = 10
         current_index = 0
-        for building_type in get_all_buildings():
+        for building_type in get_purchasable_buildings():
             current_x = 10 if (current_index % 2) == 0 else 105
             button = BuildingButton((current_x, current_y), building_type)
             self.add_component(button)

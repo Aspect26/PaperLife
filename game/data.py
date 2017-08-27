@@ -1,7 +1,7 @@
 from typing import List, Type
 
 from city.buildings.building import Building
-from city.buildings.town_hall import TownHall
+from city.buildings.buildings import TownHall, FlatHouse1, FlatHouse3, FlatHouse2
 
 
 class BuildingData(object):
@@ -10,12 +10,15 @@ class BuildingData(object):
         self.building = building
         building = building(None)
         self.title = building.title
+        self.cost = building.cost
         self.image_path = building.image_path
 
-_ALL_BUILDINGS = [
-    BuildingData(TownHall),
+_PURCHASABLE_BUILDINGS = [
+    BuildingData(FlatHouse1),
+    BuildingData(FlatHouse2),
+    BuildingData(FlatHouse3),
 ]
 
 
-def get_all_buildings() -> List[BuildingData]:
-    return _ALL_BUILDINGS
+def get_purchasable_buildings() -> List[BuildingData]:
+    return _PURCHASABLE_BUILDINGS
