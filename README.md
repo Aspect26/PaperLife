@@ -17,4 +17,5 @@ will be fixed (but still based on the population) not random.
 # What is implemented?
 * Placement of new buildings on the play field
 * Save/load system
+* Population system (overtime increment, dependent on services provided by the city (food, police, hospitals, ...)
 * Available buildings: Town Hall, Flat house #1, #2, #3
