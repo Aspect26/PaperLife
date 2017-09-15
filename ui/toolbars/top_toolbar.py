@@ -13,7 +13,7 @@ from ui.component import UIComponent
 class TopToolbar(UIComponent):
 
     def __init__(self, city):
-        super().__init__(Rect(0, 0, GameSettings.Screen.WIDTH, 40))
+        super().__init__(Rect(0, 0, GameSettings.Screen.WIDTH, 40), None)
         self._INDENT = self.position.height
         self._BORDER_POINTS = [
             (self.position.x, self.position.y),

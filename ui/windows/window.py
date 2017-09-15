@@ -6,12 +6,13 @@ from pygame.surface import Surface
 
 from rendering.colors import Colors
 from ui.component import UIComponent
+from ui.rectangular_component import RectangularComponent
 
 
-class Window(UIComponent):
+class Window(RectangularComponent):
 
     def __init__(self, position: Rect):
-        super().__init__(position)
+        super().__init__(position, None)
         self._components = []
 
     def add_component(self, component: UIComponent):
@@ -30,11 +31,24 @@ class Window(UIComponent):
                 component.handle_mouse_up(game, position)
                 break
 
+    def handle_mouse_over(self, screen, position: Tuple) -> None:
+        for component in reversed(self._components):
+            if component.position.collidepoint(position):
+                component.handle_mouse_over(screen, position)
+                break
+
     def render(self, screen: Surface) -> None:
         self._render_background(screen)
         self._render_border(screen)
         for component in self._components:
             component.render(screen)
+
+    def is_at(self, position: Tuple):
+        if super().is_at(position):
+            return True
+        for child in self._components:
+            if child.is_at(position):
+                return True
 
     def _render_background(self, screen: Surface) -> None:
         pygame.draw.rect(screen, Colors.White,

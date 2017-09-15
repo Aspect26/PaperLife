@@ -37,6 +37,10 @@ class UI:
             self._render_grid(screen)
         for ui_component in self._active_ui_components:
             ui_component.render(screen)
+        mouse_position = pygame.mouse.get_pos()
+        for ui_component in self._active_ui_components:
+            if ui_component.is_at(mouse_position):
+                ui_component.handle_mouse_over(screen, mouse_position)
 
     def toggle_grid(self) -> None:
         self._show_grid = not self._show_grid
