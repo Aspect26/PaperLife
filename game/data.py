@@ -1,7 +1,7 @@
 from typing import List, Type
 
-from city.buildings.building import Building
-from city.buildings.buildings import TownHall, FlatHouse1, FlatHouse3, FlatHouse2
+from city.objects.buildings.building import Building
+from city.objects.buildings.buildings import FlatHouse1, FlatHouse3, FlatHouse2
 
 
 class BuildingData(object):

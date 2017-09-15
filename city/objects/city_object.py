@@ -2,43 +2,27 @@ from typing import Tuple
 
 from pygame.rect import Rect
 
-from city.growth import GrowthFactor
 from game.constants import GameSettings
 from game.json_keys import JsonKeys
 
 
-class Building(object):
-    def __init__(self, rent: int, max_population: int, cost: int, growth_factor: GrowthFactor, city, position: Rect,
-                 image_file: str, title: str):
-        self._rent = rent
-        self._max_population = max_population
-        self._population = 0
+class CityObject(object):
+
+    def __init__(self, city, cost: int, position: Rect, income, image_file: str, title: str):
+        self._income = income
         self._cost = cost
-        self._growth_factor = growth_factor
-        self._city = city
         self._position = position
+        self._city = city
         self._image_path = GameSettings.Paths.Images.Buildings + image_file
         self._title = title
 
     @property
-    def rent(self) -> int:
-        return self._rent
-
-    @property
-    def max_population(self) -> int:
-        return self._max_population
-
-    @property
-    def population(self) -> int:
-        return self._population
+    def income(self) -> int:
+        return self._income
 
     @property
     def cost(self) -> int:
         return self._cost
-
-    @property
-    def growth_factor(self) -> GrowthFactor:
-        return self._growth_factor
 
     @property
     def city(self):
@@ -76,19 +60,18 @@ class Building(object):
         self._position.x = position[0]
         self._position.y = position[1]
 
-    def increase_population(self):
-        if not self._population >= self._max_population:
-            self._population += 1
+    def is_populated(self):
+        return False
 
     def jsonify(self) -> dict:
         return {
             JsonKeys.Building.Id: type(self).__name__,
-            JsonKeys.Building.Population: self._population,
             JsonKeys.Position.X: self.position.x,
             JsonKeys.Position.Y: self.position.y,
         }
 
     def load(self, data: dict) -> None:
-        self._population = data[JsonKeys.Building.Population]
+        from city.objects.buildings.buildings import TownHall, FlatHouse1, FlatHouse2, FlatHouse3
+        # NOTE: the above imports need to be here because of loading through 'reflection'
         self._position.x = data[JsonKeys.Position.X]
         self._position.y = data[JsonKeys.Position.Y]

@@ -2,7 +2,7 @@ from typing import Tuple
 
 import pygame
 
-from city.buildings.building import Building
+from city.objects.buildings.building import Building
 from game.constants import GameSettings
 from game.state import PlacingNewBuildingState
 from rendering.colors import Colors

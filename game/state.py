@@ -1,4 +1,4 @@
-from city.buildings.building import Building
+from city.objects.buildings.building import Building
 
 
 class GameState(object):

@@ -8,8 +8,8 @@ class CollectRentEvent(GameEvent):
 
     def handle(self):
         total_income = 0
-        for building in self._city.get_buildings():
-            total_income += building.rent * building.population
+        for building in self._city.get_city_objects():
+            total_income += building.income * building.population
 
         self._city.add_money(total_income)
         # TODO: make this constant a !named! constant

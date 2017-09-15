@@ -1,7 +1,7 @@
 from pygame.rect import Rect
 
-from city.buildings.building import Building
 from city.growth import GrowthFactor
+from city.objects.buildings.building import Building
 
 """
 Common building cost is rent * population *  100

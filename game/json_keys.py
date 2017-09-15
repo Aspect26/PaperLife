@@ -2,7 +2,7 @@ class JsonKeys:
 
     class City:
         TotalMoney = 'total_money'
-        Buildings = 'buildings'
+        Objects = 'city_objects'
         Events = 'events'
 
     class Event:
