@@ -7,16 +7,18 @@ from pygame.surface import Surface
 from game.data import CityObjectData
 from game.state import PlacingNewBuildingState
 from rendering.colors import Colors
-from ui.component import UIComponent
+from rendering.fonts import Fonts
+from ui.rectangular_component import RectangularComponent
 
 
-class BuildingButton(UIComponent):
+class BuildingButton(RectangularComponent):
 
     def __init__(self, position: Tuple, building_type: CityObjectData):
         self._WIDTH = 85
         self._HEIGHT = 100
         self._BORDER_SIZE = 2
-        super().__init__(Rect(position[0], position[1], self._WIDTH, self._HEIGHT))
+        description = 'Cost: {0}'.format(building_type.cost)
+        super().__init__(Rect(position[0], position[1], self._WIDTH, self._HEIGHT), description)
         self._building_type = building_type
 
     def handle_mouse_down(self, game, position: Tuple) -> None:
@@ -42,7 +44,6 @@ class BuildingButton(UIComponent):
         screen.blit(picture, (self.position.x, self.position.y))
 
     def _render_building_label(self, screen: Surface) -> None:
-        # TODO: move all fonts to one place
-        font = pygame.font.SysFont('monospace', 10)
+        font = Fonts.SMALL_FONT
         label = font.render(self._building_type.title, 1, Colors.Blue)
         screen.blit(label, (self.position.x + 2, self.position.y + self.position.width + 2))
