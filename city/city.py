@@ -5,8 +5,8 @@ from typing import List, Tuple
 from pygame.rect import Rect
 
 from city.growth import GrowthFactor
-from city.objects.buildings.building import Building
 from city.objects.buildings.buildings import TownHall, FlatHouse1, FlatHouse2, FlatHouse3
+from city.objects.road import Road
 # The above imports need to be here because of 'reflection' loading
 from city.objects.city_object import CityObject
 from events.collect_rent_event import CollectRentEvent
@@ -23,7 +23,7 @@ class City(object):
         self._events_heap = []
         self._occupied_fields = []
 
-        self.add_building(TownHall(self))
+        self.add_city_object(TownHall(self))
         self.enqueue_game_event(CollectRentEvent(self))
         self.enqueue_game_event(PopulationGrowthEvent(self))
 
@@ -31,7 +31,7 @@ class City(object):
         return self._money
 
     def get_population(self) -> int:
-        return sum(city_object.population for city_object in self._city_objects)
+        return sum(city_object.population if city_object.is_populated() else 0 for city_object in self._city_objects)
 
     def get_growth_factor(self) -> GrowthFactor:
         food_total = 0
@@ -65,11 +65,11 @@ class City(object):
     def add_money(self, amount: int) -> None:
         self._money += amount
 
-    def add_building(self, building: Building) -> None:
-        self._city_objects.append(building)
-        self._money -= building.cost
-        for x in range(building.x, building.width + building.x):
-            for y in range(building.y, building.height + building.y):
+    def add_city_object(self, city_object: CityObject) -> None:
+        self._city_objects.append(city_object)
+        self._money -= city_object.cost
+        for x in range(city_object.x, city_object.width + city_object.x):
+            for y in range(city_object.y, city_object.height + city_object.y):
                 self._occupied_fields.append((x, y))
 
     def simulate(self) -> None:

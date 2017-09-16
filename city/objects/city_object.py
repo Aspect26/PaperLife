@@ -2,23 +2,29 @@ from typing import Tuple
 
 from pygame.rect import Rect
 
+from city.growth import GrowthFactor
 from game.constants import GameSettings
 from game.json_keys import JsonKeys
 
 
 class CityObject(object):
 
-    def __init__(self, city, cost: int, position: Rect, income, image_file: str, title: str):
+    def __init__(self, city, cost: int, position: Rect, income, growth_factor: GrowthFactor, image_file: str, title: str):
         self._income = income
+        self._growth_factor = growth_factor
         self._cost = cost
         self._position = position
         self._city = city
-        self._image_path = GameSettings.Paths.Images.Buildings + image_file
+        self._image_path = GameSettings.Paths.Images.CityObjects + image_file
         self._title = title
 
     @property
     def income(self) -> int:
         return self._income
+
+    @property
+    def growth_factor(self) -> GrowthFactor:
+        return self._growth_factor
 
     @property
     def cost(self) -> int:

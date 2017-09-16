@@ -6,12 +6,12 @@ from game.json_keys import JsonKeys
 
 
 class Building(CityObject):
+
     def __init__(self, income: int, max_population: int, cost: int, growth_factor: GrowthFactor, city, position: Rect,
                  image_file: str, title: str):
-        super().__init__(city, cost, position, income, image_file, title)
+        super().__init__(city, cost, position, income, growth_factor, image_file, title)
         self._max_population = max_population
         self._population = 0
-        self._growth_factor = growth_factor
 
     @property
     def max_population(self) -> int:
@@ -20,10 +20,6 @@ class Building(CityObject):
     @property
     def population(self) -> int:
         return self._population
-
-    @property
-    def growth_factor(self) -> GrowthFactor:
-        return self._growth_factor
 
     def is_populated(self):
         return True

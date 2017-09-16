@@ -61,7 +61,7 @@ class Game(object):
             building.set_position(
                 (position[0] / GameSettings.Game.FIELD_SIZE, position[1] / GameSettings.Game.FIELD_SIZE))
             if not self._city.is_rectangle_ocuppied(building.position):
-                self._city.add_building(building)
+                self._city.add_city_object(building)
                 self._state = NormalState()
 
     def save_game(self) -> None:
