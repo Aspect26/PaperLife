@@ -5,6 +5,7 @@ from game.constants import GameSettings
 from ui.ui import UI
 
 
+# TODO: remove this class -> the rendering will be directly in the City class
 class Renderer:
     def __init__(self, width, height):
         self._screen = pygame.display.set_mode((width, height))
@@ -22,13 +23,9 @@ class Renderer:
         self._screen.blit(background_image, (0, 0))
 
     def _render_city(self, city: City) -> None:
-        for building in city.get_buildings():
+        for city_object in city.get_city_objects():
             # TODO: introduce image caching
-            building_picture = pygame.image.load(building.image_path)
-            building_picture = pygame.transform.scale(building_picture, (
-            building.width * GameSettings.Game.FIELD_SIZE, building.height * GameSettings.Game.FIELD_SIZE))
-            self._screen.blit(building_picture,
-                              (building.x * GameSettings.Game.FIELD_SIZE, building.y * GameSettings.Game.FIELD_SIZE))
+            city_object.render(self._screen)
 
     def _render_ui(self, ui: UI):
         ui.render(self._screen)

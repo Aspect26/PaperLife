@@ -22,5 +22,5 @@ class BuildingsWindow(Window):
             current_x = 10 if (current_index % 2) == 0 else 105
             button = BuildingButton((current_x, current_y), building_type)
             self.add_component(button)
-            current_y += 95 * (current_index % 2)
+            current_y += 105 * (current_index % 2)
             current_index += 1

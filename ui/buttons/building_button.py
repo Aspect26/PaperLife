@@ -4,7 +4,7 @@ import pygame
 from pygame.rect import Rect
 from pygame.surface import Surface
 
-from game.data import BuildingData
+from game.data import CityObjectData
 from game.state import PlacingNewBuildingState
 from rendering.colors import Colors
 from ui.component import UIComponent
@@ -12,7 +12,7 @@ from ui.component import UIComponent
 
 class BuildingButton(UIComponent):
 
-    def __init__(self, position: Tuple, building_type: BuildingData):
+    def __init__(self, position: Tuple, building_type: CityObjectData):
         self._WIDTH = 85
         self._HEIGHT = 100
         self._BORDER_SIZE = 2
@@ -24,7 +24,7 @@ class BuildingButton(UIComponent):
 
     def handle_mouse_up(self, game, position: Tuple) -> None:
         if self._building_type.cost <= game.get_city().get_money():
-            game.set_state(PlacingNewBuildingState(self._building_type.building(game.get_city())))
+            game.set_state(PlacingNewBuildingState(self._building_type.city_object(game.get_city())))
 
     def render(self, screen: Surface) -> None:
         self._render_building_image(screen)

@@ -9,5 +9,5 @@ class GameSettings:
 
     class Paths:
         class Images:
-            Buildings = './resources/img/buildings/'
+            CityObjects = './resources/img/city_objects/'
             Background = './resources/img/background.jpg'
