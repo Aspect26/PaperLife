@@ -33,13 +33,20 @@ _ROAD_IMAGE_MAP = {
 class Road(CityObject):
     def __init__(self, city):
         position = Rect(0, 0, 1, 1)
-        super().__init__(city, 100, position, 0, GrowthFactor(0, 0), 'road_2s.png', '')
+        super().__init__(city, 100, position, 0, GrowthFactor(0, 0), 'road_2s.png', 'Road')
+        self.current_image = self.image_path, 0
 
     def render(self, screen: pygame.Surface) -> None:
-        self.update_my_image(
-            screen)  # TODO: this should be really called only when a building around myself is built and game load
+        self.update_my_image()  # TODO: this should be really called only when a building around myself is built and game load
 
-    def update_my_image(self, screen: pygame.Surface):
+        image, angle = self.current_image
+        building_picture = pygame.image.load(GameSettings.Paths.Images.CityObjects + image)
+        building_picture = pygame.transform.scale(building_picture, (
+            self.width * GameSettings.Game.FIELD_SIZE, self.height * GameSettings.Game.FIELD_SIZE))
+        building_picture = pygame.transform.rotate(building_picture, angle)
+        screen.blit(building_picture, (self.x * GameSettings.Game.FIELD_SIZE, self.y * GameSettings.Game.FIELD_SIZE))
+
+    def update_my_image(self):
         surrounding = list('0000')
         if isinstance(self.city.get_object_at((self.position.x - 1, self.position.y)), Road):
             surrounding[1] = '1'
@@ -49,10 +56,4 @@ class Road(CityObject):
             surrounding[0] = '1'
         if isinstance(self.city.get_object_at((self.position.x, self.position.y + 1)), Road):
             surrounding[2] = '1'
-
-        image, angle = _ROAD_IMAGE_MAP[''.join(surrounding)]
-        building_picture = pygame.image.load(GameSettings.Paths.Images.CityObjects + image)
-        building_picture = pygame.transform.scale(building_picture, (
-            self.width * GameSettings.Game.FIELD_SIZE, self.height * GameSettings.Game.FIELD_SIZE))
-        building_picture = pygame.transform.rotate(building_picture, angle)
-        screen.blit(building_picture, (self.x * GameSettings.Game.FIELD_SIZE, self.y * GameSettings.Game.FIELD_SIZE))
+        self.current_image = _ROAD_IMAGE_MAP[''.join(surrounding)]
