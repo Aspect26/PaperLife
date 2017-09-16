@@ -1,5 +1,6 @@
 from typing import Tuple
 
+import pygame
 from pygame.rect import Rect
 
 from city.growth import GrowthFactor
@@ -8,8 +9,8 @@ from game.json_keys import JsonKeys
 
 
 class CityObject(object):
-
-    def __init__(self, city, cost: int, position: Rect, income, growth_factor: GrowthFactor, image_file: str, title: str):
+    def __init__(self, city, cost: int, position: Rect, income, growth_factor: GrowthFactor, image_file: str,
+                 title: str):
         self._income = income
         self._growth_factor = growth_factor
         self._cost = cost
@@ -68,6 +69,12 @@ class CityObject(object):
 
     def is_populated(self):
         return False
+
+    def render(self, screen: pygame.Surface) -> None:
+        building_picture = pygame.image.load(self.image_path)
+        building_picture = pygame.transform.scale(building_picture, (
+            self.width * GameSettings.Game.FIELD_SIZE, self.height * GameSettings.Game.FIELD_SIZE))
+        screen.blit(building_picture, (self.x * GameSettings.Game.FIELD_SIZE, self.y * GameSettings.Game.FIELD_SIZE))
 
     def jsonify(self) -> dict:
         return {

@@ -1,6 +1,6 @@
 import heapq
 import time
-from typing import List, Tuple
+from typing import List, Tuple, Union
 
 from pygame.rect import Rect
 
@@ -48,13 +48,22 @@ class City(object):
     def get_city_objects(self) -> List[CityObject]:
         return self._city_objects
 
+    def get_object_at(self, position: Tuple) -> Union[CityObject, None]:
+        for x, y, city_object in self._occupied_fields:
+            if x == position[0] and y == position[1]:
+                return city_object
+        return None
+
     def _set_money(self, money: int) -> None:
         self._money = money
 
-    def is_field_occupied(self, field: Tuple):
-        return field in self._occupied_fields
+    def is_field_occupied(self, field: Tuple) -> bool:
+        for x, y, _ in self._occupied_fields:
+            if x == field[0] and y == field[1]:
+                return True
+        return False
 
-    def is_rectangle_ocuppied(self, rectangle: Rect):
+    def is_rectangle_ocuppied(self, rectangle: Rect) -> bool:
         for x in range(rectangle.x, rectangle.x + rectangle.width, 1):
             for y in range(rectangle.y, rectangle.y + rectangle.height, 1):
                 if self.is_field_occupied((x, y)):
@@ -70,7 +79,7 @@ class City(object):
         self._money -= city_object.cost
         for x in range(city_object.x, city_object.width + city_object.x):
             for y in range(city_object.y, city_object.height + city_object.y):
-                self._occupied_fields.append((x, y))
+                self._occupied_fields.append((x, y, city_object))
 
     def simulate(self) -> None:
         current_seconds = round(time.time())
@@ -116,4 +125,4 @@ class City(object):
         for city_object in self._city_objects:
             for x in range(city_object.x, city_object.x + city_object.width):
                 for y in range(city_object.y, city_object.y + city_object.height):
-                    self._occupied_fields.append((x, y))
+                    self._occupied_fields.append((x, y, city_object))
