@@ -4,6 +4,7 @@ from pygame.rect import Rect
 from city.growth import GrowthFactor
 from city.objects.city_object import CityObject
 from game.constants import GameSettings
+from rendering.image_cache import get_image
 
 IMAGE_ALL = 'road_4.png'
 IMAGE_THREE = 'road_3.png'
@@ -40,7 +41,7 @@ class Road(CityObject):
         self.update_my_image()  # TODO: this should be really called only when a building around myself is built and game load
 
         image, angle = self.current_image
-        building_picture = pygame.image.load(GameSettings.Paths.Images.CityObjects + image)
+        building_picture = get_image(GameSettings.Paths.Images.CityObjects + image)
         building_picture = pygame.transform.scale(building_picture, (
             self.width * GameSettings.Game.FIELD_SIZE, self.height * GameSettings.Game.FIELD_SIZE))
         building_picture = pygame.transform.rotate(building_picture, angle)

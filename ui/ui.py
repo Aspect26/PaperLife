@@ -6,6 +6,7 @@ from city.objects.buildings.building import Building
 from game.constants import GameSettings
 from game.state import PlacingNewBuildingState
 from rendering.colors import Colors
+from rendering.image_cache import get_image
 from ui.toolbars.top_toolbar import TopToolbar
 from ui.windows.buildings_window import BuildingsWindow
 
@@ -83,7 +84,7 @@ class UI:
         hitbox_surface = pygame.Surface((building.width * field_size, building.height * field_size))
         hitbox_surface.fill(Colors.Green)
         hitbox_surface.set_alpha(128)
-        building_picture = pygame.image.load(building.image_path)
+        building_picture = get_image(building.image_path)
         building_picture = pygame.transform.scale(building_picture, (
             building.width * GameSettings.Game.FIELD_SIZE, building.height * GameSettings.Game.FIELD_SIZE))
         hitbox_surface.blit(building_picture, (0, 0))

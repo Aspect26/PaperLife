@@ -8,6 +8,7 @@ from game.data import CityObjectData
 from game.state import PlacingNewBuildingState
 from rendering.colors import Colors
 from rendering.fonts import Fonts
+from rendering.image_cache import get_image
 from ui.rectangular_component import RectangularComponent
 
 
@@ -39,7 +40,7 @@ class BuildingButton(RectangularComponent):
                          self._BORDER_SIZE)
 
     def _render_building_image(self, screen: Surface) -> None:
-        picture = pygame.image.load(self._building_type.image_path)
+        picture = get_image(self._building_type.image_path)
         picture = pygame.transform.scale(picture, (self.position.width, self.position.width))
         screen.blit(picture, (self.position.x, self.position.y))
 

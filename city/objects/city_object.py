@@ -6,6 +6,7 @@ from pygame.rect import Rect
 from city.growth import GrowthFactor
 from game.constants import GameSettings
 from game.json_keys import JsonKeys
+from rendering.image_cache import get_image
 
 
 class CityObject(object):
@@ -71,7 +72,7 @@ class CityObject(object):
         return False
 
     def render(self, screen: pygame.Surface) -> None:
-        building_picture = pygame.image.load(self.image_path)
+        building_picture = get_image(self.image_path)
         building_picture = pygame.transform.scale(building_picture, (
             self.width * GameSettings.Game.FIELD_SIZE, self.height * GameSettings.Game.FIELD_SIZE))
         screen.blit(building_picture, (self.x * GameSettings.Game.FIELD_SIZE, self.y * GameSettings.Game.FIELD_SIZE))

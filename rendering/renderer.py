@@ -2,6 +2,7 @@ import pygame
 
 from city.city import City
 from game.constants import GameSettings
+from rendering.image_cache import get_image
 from ui.ui import UI
 
 
@@ -17,7 +18,7 @@ class Renderer:
         self._apply_render()
 
     def _render_background(self) -> None:
-        background_image = pygame.image.load(GameSettings.Paths.Images.Background)
+        background_image = get_image(GameSettings.Paths.Images.Background)
         background_image = pygame.transform.scale(background_image,
                                                   (GameSettings.Screen.WIDTH, GameSettings.Screen.HEIGHT))
         self._screen.blit(background_image, (0, 0))
